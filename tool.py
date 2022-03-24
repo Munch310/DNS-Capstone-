@@ -22,15 +22,14 @@ from multiprocessing import Process, Queue
 import collections
 import re
 
-def scan(t_IP, start, end, result):
+def scan(t_IP, port, start, end):
 
     s = socket(AF_INET, SOCK_STREAM)
-    for i in range(50, 52):
-        conn = s.connect_ex((t_IP, i))
+    for i in range(start,end,1):
+        conn = s.connect_ex((t_IP, port[i]))
         if(conn == 0) :
-            print ('Port %d: OPEN' % (i,))
+            print ('Port %d: OPEN' % (port[i]))
         s.close()
-
 
 def out_bound_freq():
     for i in range(0,100): 
@@ -48,8 +47,6 @@ def out_bound_freq():
 
 def banner():
     banner = '''
-배너 넣을곳
-
 1. Port Scan
 2. out bound ip frequency extraction
 3. ##################################
@@ -60,22 +57,19 @@ def banner():
 def main():
     banner()
 
-    START, END = 0, 5
-    result = Queue()
-    target = input('Enter the host to be scanned: ')
+    port=[80, 20, 21, 22, 23, 25, 53, 5357, 110, 123, 161, 443, 1433, 3306, 1521, 8080, 135, 139, 137, 138, 445, 514, 8443, 3389, 8090, 42, 70, 79, 88, 118, 156, 220]
+    target = input('Enter the host or url to be scanned: ')
     t_IP = gethostbyname(target)
     print ('Starting scan on host: ', t_IP)
     startTime = time.time()
-    th1 = Process(target=scan, args=(t_IP, START, END//2, result))
-    th2 = Process(target=scan, args=(t_IP, END//2, END, result))
-    
+    th1 = Process(target=scan, args=(t_IP,port,0,len(port)//2))
+    th2 = Process(target=scan, args=(t_IP,port,len(port)//2,len(port)))
     th1.start()
     th2.start()
     th1.join()
     th2.join()
     print('Time taken:', time.time() - startTime)
+    
 
 if __name__ == '__main__':
     main()
-
-
