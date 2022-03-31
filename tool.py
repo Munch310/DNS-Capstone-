@@ -33,7 +33,7 @@ def scan(t_IP, port, start, end):
 
     print('Time taken:', time.time() - startTime)
 
-# 2 out_bound 패킷 처리
+# 2 out_bound 통신 처리
 # 현재 localhost에서 어디랑 제일 통신을 많이 하는지 확인
 def out_bound_freq():
     for i in range(0,100): 
