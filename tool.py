@@ -8,11 +8,12 @@ from bs4 import BeautifulSoup
 import collections
 import re
 from math import ceil 
-from sig import *
+from stg import *
 import itertools
 import argparse
 
-# 1 포트스캔 (1분 정도 소요?)
+
+# 1 포트스캔 (1분 정도 소요)
 def scan():
     
     port=[80, 20, 21, 22, 23, 25, 53, 5357, 110, 123, 161, 443, 1433, 3306, 1521, 8080, 135, 139, 137, 138, 445, 514, 8443, 3389, 8090, 42, 70, 79, 88, 118, 156, 220]
@@ -35,7 +36,7 @@ def scan():
 
     print('Time taken:', time.time() - startTime)
 
-# 2 out_bound 통신 처리
+# 2 out_bound 패킷 처리
 # 현재 localhost에서 어디랑 제일 통신을 많이 하는지 확인
 def out_bound_freq():
     for i in range(0,100): 
@@ -62,9 +63,6 @@ def banner():
 
 def main():
     banner()
-    scan()
-
-    
-
+    stg()
 if __name__ == '__main__':
     main()

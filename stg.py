@@ -39,7 +39,7 @@ def size_rt(bytes):
 		size_result = str(int(ceil(bytes/(1024**4)))) + 'TB'
 	return size_result
 
-if __name__ == '__main__':
+def stg():
 	file_name = input('Write file name : ')
 	parser = argparse.ArgumentParser()
 	parser.add_argument('file', nargs='?', default=file_name)
