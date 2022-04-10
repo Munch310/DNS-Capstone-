@@ -71,7 +71,7 @@ def stg():
 				string = string[file_index + len(file_sig[cnt]):]
 				cnt -= 1
 		else:
-			out_file_flag = 0
+			check_flag = 0
 			continue 		
 	if chck == 0:
 		print('숨겨진 파일이 없습니다.')
